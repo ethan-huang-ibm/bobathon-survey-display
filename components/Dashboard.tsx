@@ -259,7 +259,7 @@ export default function Dashboard() {
       <div className="mb-6 flex justify-between items-center flex-wrap gap-4">
         <div>
           <h1 className="text-4xl font-bold text-white">
-            US Express Bobathon Survey Results
+            {fileName.split('.csv')[0]} Bobathon Survey Results
           </h1>
           {fileName && (
             <p className="text-white/60 text-sm mt-2">
