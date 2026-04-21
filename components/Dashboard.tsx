@@ -153,7 +153,7 @@ export default function Dashboard() {
     const size = row['7'] || 'Unknown';
     const other = row['7_10_TEXT'] || 'Unknown'
     size.split("/").forEach((s) => {
-      if (size !== "Other" && size !== "Unknown") acc[s] = (acc[s] || 0) + 1;
+      if (s !== "Other" && s !== "Unknown") acc[s] = (acc[s] || 0) + 1;
     })
     other.split("/").forEach((s) => {
       if (other !== "Unknown") acc[s] = (acc[s] || 0) + 1;
@@ -215,8 +215,6 @@ export default function Dashboard() {
     }
   });
 
-  console.log("DATA", data); 
-
   return (
     <div className="p-6">
       <div className="mb-6 flex justify-between items-center flex-wrap gap-4">
@@ -248,11 +246,6 @@ export default function Dashboard() {
       <GridLayout
       title=""
       >
-         {/* Full Data Table */}
-        {/* <DataTable
-          data={data}
-          onUpdateCell={updateCell}
-        /> */}
 
         {/* Summary Stats Cards */}
         <StatsCard
