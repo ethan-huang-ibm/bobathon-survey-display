@@ -58,26 +58,6 @@ export default function Dashboard() {
     reader.readAsText(file);
   };
 
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragging(false);
-    
-    const file = e.dataTransfer.files[0];
-    if (file) {
-      handleFileUpload(file);
-    }
-  };
-
-  const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragging(true);
-  };
-
-  const handleDragLeave = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragging(false);
-  };
-
   const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -88,13 +68,15 @@ export default function Dashboard() {
   const parseCSV = (text: string): SurveyData[] => {
     const lines = text.split('\n').filter(line => line.trim());
     if (lines.length < 2) return [];
-
     const headers = lines[0].split(',').map(h => h.trim());
     const rows: SurveyData[] = [];
 
     for (let i = 1; i < lines.length; i++) {
       const values = parseCSVLine(lines[i]);
-      if (values.length === headers.length) {
+
+      // Check if the row is not empty and the first column is not empty
+      const check = lines[i].split(",")
+      if (values.length === headers.length && check[0]) {
         const row: SurveyData = {};
         headers.forEach((header, index) => {
           row[header] = values[index];
@@ -124,27 +106,6 @@ export default function Dashboard() {
     }
     result.push(current.trim());
     return result;
-  };
-
-  const updateCell = (rowIndex: number, field: string, value: string) => {
-    const newData = [...data];
-    newData[rowIndex][field] = value;
-    setData(newData);
-  };
-
-  const exportData = () => {
-    const headers = Object.keys(data[0] || {});
-    const csv = [
-      headers.join(','),
-      ...data.map(row => headers.map(h => `"${row[h] || ''}"`).join(','))
-    ].join('\n');
-
-    const blob = new Blob([csv], { type: 'text/csv' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'survey-data-export.csv';
-    a.click();
   };
 
   if (loading) {
@@ -254,6 +215,8 @@ export default function Dashboard() {
     }
   });
 
+  console.log("DATA", data); 
+
   return (
     <div className="p-6">
       <div className="mb-6 flex justify-between items-center flex-wrap gap-4">
@@ -279,12 +242,6 @@ export default function Dashboard() {
               Upload CSV
             </span>
           </label>
-          {/* <button
-            onClick={exportData}
-            className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors"
-          >
-            Export Data
-          </button> */}
         </div>
       </div>
       <br/>
