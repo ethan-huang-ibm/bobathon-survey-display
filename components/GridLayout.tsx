@@ -47,7 +47,7 @@ export function GridLayout({ title: title, children }: GridLayoutProps) {
 
   return (
     <>
-      <h3 className="text-xl font-bold text-white mb-4">
+      <h3 className="text-xl font-bold text-foreground mb-4">
         {title}
       </h3>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

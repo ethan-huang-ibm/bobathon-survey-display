@@ -32,7 +32,7 @@ export function ChartWidget({ title, data, type }: ChartWidgetProps) {
 
   return (
     <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow col-span-1 md:col-span-2 lg:col-span-1">
-      <h3 className="text-l font-bold text-white mb-4">{title}</h3>
+      <h3 className="text-l font-bold text-foreground mb-4">{title}</h3>
       
       {type === 'bar' && (
         <div className="space-y-3">
@@ -44,10 +44,10 @@ export function ChartWidget({ title, data, type }: ChartWidgetProps) {
               onMouseLeave={() => setHoveredIndex(null)}
             >
               <div className="flex items-center justify-between mb-1">
-                <span className="text-white/80 text-sm truncate max-w-[60%]">
+                <span className="text-foreground/80 text-sm truncate max-w-[60%]">
                   {item.name}
                 </span>
-                <span className="text-white font-semibold">{item.value}</span>
+                <span className="text-foreground font-semibold">{item.value}</span>
               </div>
               <div className="w-full bg-white/20 rounded-full h-3 overflow-hidden">
                 <div
@@ -112,11 +112,11 @@ export function ChartWidget({ title, data, type }: ChartWidgetProps) {
                       backgroundColor: `hsl(${(index * 360) / data.length}, 70%, 60%)`,
                     }}
                   />
-                  <span className="text-white/80 text-sm truncate max-w-[150px]">
+                  <span className="text-foreground/80 text-sm truncate max-w-[150px]">
                     {item.name}
                   </span>
                 </div>
-                <span className="text-white font-semibold">
+                <span className="text-foreground font-semibold">
                   {item.value} ({((item.value / total) * 100).toFixed(1)}%)
                 </span>
               </div>

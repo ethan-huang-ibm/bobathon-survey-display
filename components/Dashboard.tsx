@@ -150,7 +150,7 @@ export default function Dashboard() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <div className="text-white text-2xl">Loading dashboard...</div>
+        <div className="text-foreground text-2xl">Loading dashboard...</div>
       </div>
     );
   }
@@ -258,11 +258,11 @@ export default function Dashboard() {
     <div className="p-6">
       <div className="mb-6 flex justify-between items-center flex-wrap gap-4">
         <div>
-          <h1 className="text-4xl font-bold text-white">
+          <h1 className="text-4xl font-bold text-foreground">
             {fileName.split('.csv')[0]} Bobathon Survey Results
           </h1>
           {fileName && (
-            <p className="text-white/60 text-sm mt-2">
+            <p className="text-foreground/60 text-sm mt-2">
               📄 {fileName} ({data.length} responses)
             </p>
           )}
