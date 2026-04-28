@@ -43,8 +43,8 @@ export function ChartWidget({ title, data, type }: ChartWidgetProps) {
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
             >
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-foreground/80 text-sm truncate max-w-[60%]">
+              <div className="flex items-center justify-between gap-2 w-full">
+                <span className="text-foreground/80 text-sm truncate max-w-[500px]">
                   {item.name}
                 </span>
                 <span className="text-foreground font-semibold">{item.value}</span>
@@ -112,7 +112,7 @@ export function ChartWidget({ title, data, type }: ChartWidgetProps) {
                       backgroundColor: `hsl(${(index * 360) / data.length}, 70%, 60%)`,
                     }}
                   />
-                  <span className="text-foreground/80 text-sm truncate max-w-[150px]">
+                  <span className="text-foreground/80 text-sm truncate max-w-[300px]">
                     {item.name}
                   </span>
                 </div>
