@@ -153,11 +153,20 @@ export default function Dashboard() {
     const size = row['7'] || 'Unknown';
     const other = row['7_10_TEXT'] || 'Unknown'
     size.split(/(?=[A-Z])/).forEach((s) => {
-      const trimmed = s.includes(",") ? s.split(",")[0].trim() : s.trim();
+      let trimmed = s.trim();
+
+      if (trimmed.charAt(trimmed.length - 1) == ","){
+        trimmed = trimmed.slice(0, -1);
+      }
+
       if (trimmed !== "Other" && trimmed !== "Unknown" && trimmed !== "") acc[trimmed] = (acc[trimmed] || 0) + 1;
     })
     other.split(/(?=[A-Z])/).forEach((s) => {
-      const trimmed = s.includes(",") ? s.split(",")[0].trim() : s.trim();
+      let trimmed = s.trim();
+
+      if (trimmed.charAt(trimmed.length - 1) == ","){
+        trimmed = trimmed.slice(0, -1);
+      }
       if (other !== "Unknown" && trimmed !== "") acc[trimmed] = (acc[trimmed] || 0) + 1;
     })
     return acc;
