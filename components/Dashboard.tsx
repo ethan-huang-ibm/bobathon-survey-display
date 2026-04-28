@@ -152,11 +152,13 @@ export default function Dashboard() {
   const teamSizeDistribution = data.reduce((acc, row) => {
     const size = row['7'] || 'Unknown';
     const other = row['7_10_TEXT'] || 'Unknown'
-    size.split("/").forEach((s) => {
-      if (s !== "Other" && s !== "Unknown") acc[s] = (acc[s] || 0) + 1;
+    size.split(/(?=[A-Z])/).forEach((s) => {
+      const trimmed = s.includes(",") ? s.split(",")[0].trim() : s.trim();
+      if (trimmed !== "Other" && trimmed !== "Unknown" && trimmed !== "") acc[trimmed] = (acc[trimmed] || 0) + 1;
     })
-    other.split("/").forEach((s) => {
-      if (other !== "Unknown") acc[s] = (acc[s] || 0) + 1;
+    other.split(/(?=[A-Z])/).forEach((s) => {
+      const trimmed = s.includes(",") ? s.split(",")[0].trim() : s.trim();
+      if (other !== "Unknown" && trimmed !== "") acc[trimmed] = (acc[trimmed] || 0) + 1;
     })
     return acc;
   }, {} as Record<string, number>);
